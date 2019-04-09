@@ -1,10 +1,12 @@
 from flask import Flask
+from flask_cors import CORS
 
 # paths
 from auth.tba import auth_tba
 from devrant.rants import devrant_rants
 
 app = Flask(__name__)
+CORS(app)
 
 # Set up blueprints
 app.register_blueprint(auth_tba)
