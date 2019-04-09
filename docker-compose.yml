@@ -13,7 +13,7 @@ services:
       - "443:443"
     depends_on:
       - webserver
-    command: "echo 'cors' >> /etc/caddy/Caddyfile"
+    command: "bash -c 'echo cors' >> /etc/caddy/Caddyfile"
   webserver:
     ports:
       - "5000:5000"
