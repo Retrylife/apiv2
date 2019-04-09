@@ -1,0 +1,18 @@
+
+log stdout
+errors stderr
+
+tls ewpratten@gmail.com
+
+cors
+
+proxy / {
+policy round_robin
+transparent
+websocket
+upstream webserver:5000
+}
+
+gzip
+log stdout
+errors stderr
