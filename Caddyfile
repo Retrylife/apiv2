@@ -8,10 +8,10 @@ tls ewpratten@gmail.com
 cors
 
 proxy / {
-    policy round_robin
-    transparent
-    websocket
-    upstream webserver:5000
+policy round_robin
+transparent
+websocket
+upstream webserver:5000
 }
 
 gzip
