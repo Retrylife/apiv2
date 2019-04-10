@@ -16,7 +16,7 @@ EXPOSE 5000
 
 # Copy the requirements file in order to install
 # Python dependencies
-COPY ./app/requirements.txt .
+COPY ./api/requirements.txt .
 
 # Install Python dependencies
 RUN pip install -r requirements.txt
