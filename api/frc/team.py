@@ -68,5 +68,8 @@ def teamEvents(team):
         # Set info
         event_keys[year][str(event["week"])] = event["key"]
 
-    return respond({"success": True, "events": event_keys})
+    latest = event_keys[list(event_keys.keys())[-1]]
+    latest = latest[list(latest.keys())[0]]
+
+    return respond({"success": True, "events": event_keys, "latest":latest})
     
