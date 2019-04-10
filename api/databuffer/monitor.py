@@ -31,5 +31,21 @@ def monitor():
     """
 
     return data
+
+@databuffer_monitor.route("/databuffer/monitor/json", methods=["GET"])
+def monitorJson():
+    api_key = request.args.get("api-key")
+    if not api_key:
+        return respond({"success": False, "error": "No API Key Provided"})
     
-    tba_key = resp["tba"]
+    # Rewuest a tba key from keymanagement
+    err, resp = access(api_key, "tba")
+    if err:
+        return resp
+
+    urls = []
+
+    for item in buffered_urls:
+        urls.append(item['url'])
+
+    return respond({"success":True, "timeout":timeout, "urls":urls})
