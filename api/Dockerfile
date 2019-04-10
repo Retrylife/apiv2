@@ -22,7 +22,7 @@ COPY ./api/requirements.txt .
 RUN pip install -r requirements.txt
 
 # We copy the rest of the codebase into the image
-COPY ./app .
+COPY ./api .
 
 # Finally, we run uWSGI with the ini file we
 # created earlier
