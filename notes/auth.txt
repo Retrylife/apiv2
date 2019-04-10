@@ -1,0 +1,9 @@
+
+/accounts
+
+/new (post)
+user:
+password:
+email:
+
+| user | email | sha256(password) | 

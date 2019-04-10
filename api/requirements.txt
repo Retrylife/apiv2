@@ -2,3 +2,4 @@ Flask
 uWSGI
 requests
 flask-cors
+redis
