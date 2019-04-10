@@ -19,6 +19,8 @@ def monitor():
     buffered = ""
 
     for item in buffered_urls:
+        # rps = round(item["request_times"][1] - item["request_times"][0], 2)
+        # rps = 1/rps
         buffered += f"<br>{item['url']}"
     
     data = f"""

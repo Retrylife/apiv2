@@ -15,9 +15,11 @@ def inquire(url, params={}, headers={}):
     in_headers = headers
     for item in buffered_urls:
         if item["url"] == url:
+            item["request_times"][0] = item["request_times"][1]
+            item["request_times"][1] = time.clock()
             return item["response"]
     data = requests.get(url, params=in_params, headers=in_headers)
-    buffered_urls.append({"url": url, "time": time.time(), "params": in_params, "headers": in_headers, "response": data})
+    buffered_urls.append({"url": url, "time": time.time(), "request_times":[time.clock() - 1, time.clock()], "params": in_params, "headers": in_headers, "response": data})
     return data
 
 cleaning_thread = Thread(target=cleaningTask)
