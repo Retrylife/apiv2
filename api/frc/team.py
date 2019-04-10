@@ -57,7 +57,7 @@ def teamEvents(team):
     event_keys = {}
     for event in data:
         # Add years to output
-        year = event["year"]
+        year = str(event["year"])
         if year not in event_keys:
             event_keys[year] = {}
         
@@ -66,7 +66,7 @@ def teamEvents(team):
             event["week"] = "worlds"
         
         # Set info
-        event_keys[year][event["week"]] = event["key"]
+        event_keys[year][str(event["week"])] = event["key"]
 
     return respond({"success": True, "events": event_keys})
     
