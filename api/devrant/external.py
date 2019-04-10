@@ -1,8 +1,9 @@
 import requests
+from databuffer.buffer import inquire
 
 def get(endpoint, param={}):
     param["app"] = 3
-    return requests.get("https://devrant.com/api" + endpoint, params=param).json()
+    return inquire("https://devrant.com/api" + endpoint, params=param).json()
 
 def newestIds():
     rants = get("/devrant/rants", {"sort": "recent", "limit": 2})

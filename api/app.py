@@ -7,6 +7,9 @@ from auth.tba import auth_tba
 from devrant.rants import devrant_rants
 from status import status
 from frc.team import frc_teams
+from databuffer.monitor import databuffer_monitor
+from databuffer.buffer import cleaning_thread
+from auth.keygen import auth_keygen
 
 app = Flask(__name__)
 CORS(app)
@@ -24,10 +27,13 @@ def getUrls(blueprint):
     return [str(p) for p in temp_app.url_map.iter_rules()]
 
 # Set up blueprints
+print("Registering endpoints")
 register(auth_tba)
 register(devrant_rants)
 register(status)
 register(frc_teams)
+register(databuffer_monitor)
+register(auth_keygen)
 
 @app.route('/')
 def index():
@@ -48,6 +54,11 @@ def endpoints():
             output += f"<br><b>\t{html.escape(url)}</b>"
     return output
 
+# Start task threads
+print("Starting tasks")
+cleaning_thread.start()
+
 
 if __name__ == '__main__':
+    # Start webserver
     app.run(host='0.0.0.0')

@@ -1,11 +1,20 @@
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, request
+from auth.keymanagement import access
 from output import respond
-from .external import *
+from devrant.external import *
 
 devrant_rants = Blueprint("devrant rants", __name__)
 
 @devrant_rants.route("/devrant/info")
 def info():
+    api_key = request.args.get("api-key")
+    if not api_key:
+        return respond({"success": False, "error": "No API Key Provided"})
+    # Request access from keymanagement
+    err, resp = access(api_key, "tba")
+    if err:
+        return resp
+    
     ids = newestIds()
     id_diff = ids[0][0] - ids[1][0]
     time_diff = ids[0][1] - ids[1][1]
@@ -14,6 +23,15 @@ def info():
 
 @devrant_rants.route("/devrant/rants/<id>/people")
 def tba(id):
+    api_key = request.args.get("api-key")
+    if not api_key:
+        return respond({"success": False, "error": "No API Key Provided"})
+    
+    # Request access from keymanagement
+    err, resp = access(api_key, "tba")
+    if err:
+        return resp
+    
     rant = getRant(id)
 
     try:
