@@ -38,7 +38,7 @@ def simpleTeams(team):
     
     data = inquire(f"https://www.thebluealliance.com/api/v3/team/frc{team}", headers={"X-TBA-Auth-Key":tba_key}).json()
 
-    return respond({"success": True, "data": {"team_key": data["key"], "name": data["nickname"], "website": data["website"], "country": data["country"]}})
+    return respond({"success": True, "team_key": data["key"], "name": data["nickname"], "website": data["website"], "country": data["country"]})
 
 @frc_teams.route("/frc/teams/<team>/events", methods=["GET"])
 def teamEvents(team):

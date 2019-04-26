@@ -3,3 +3,4 @@ uWSGI
 requests
 flask-cors
 redis
+icalendar
