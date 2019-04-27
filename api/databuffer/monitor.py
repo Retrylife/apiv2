@@ -12,7 +12,7 @@ def monitor():
         return respond({"success": False, "error": "No API Key Provided"})
     
     # Rewuest a tba key from keymanagement
-    err, resp = access(api_key, "tba")
+    err, resp = access(api_key, "monitor")
     if err:
         return resp
 
@@ -41,7 +41,7 @@ def monitorJson():
         return respond({"success": False, "error": "No API Key Provided"})
     
     # Rewuest a tba key from keymanagement
-    err, resp = access(api_key, "tba")
+    err, resp = access(api_key, "monitor")
     if err:
         return resp
 

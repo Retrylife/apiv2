@@ -11,6 +11,7 @@ from databuffer.monitor import databuffer_monitor
 from databuffer.buffer import cleaning_thread
 from auth.keygen import auth_keygen
 from frc.events import frc_events
+from auth.devices.register import dev_reg
 
 app = Flask(__name__)
 CORS(app)
@@ -36,6 +37,7 @@ register(frc_teams)
 register(databuffer_monitor)
 register(auth_keygen)
 register(frc_events)
+register(dev_reg)
 
 @app.route('/')
 def index():
