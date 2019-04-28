@@ -91,8 +91,12 @@ def teamLatest(team):
 
     data = inquire(f"https://www.thebluealliance.com/api/v3/team/frc{team}/events/{game_year}/statuses", headers={"X-TBA-Auth-Key": tba_key}).json()
 
-    last_match = data[list(data)[0]]["last_match_key"]
-    next_match = data[list(data)[0]]["next_match_key"]
+    try:
+        last_match = data[list(data)[0]]["last_match_key"]
+        next_match = data[list(data)[0]]["next_match_key"]
+    except:
+        last_match = None
+        next_match = None
 
     win = 0
     loss = 0
@@ -112,8 +116,11 @@ def teamLatest(team):
     wlt_str = "winning" if win > loss + tie else "loosing"
 
     rank = 0
-    if data[list(data)[0]]["qual"] != None:
-        rank += data[list(data)[0]]["qual"]["ranking"]["rank"]
+    try:
+        if data[list(data)[0]]["qual"] != None:
+            rank += data[list(data)[0]]["qual"]["ranking"]["rank"]
+    except:
+        rank = 0
     
     last_match_data = {}
     if last_match != None:
@@ -153,6 +160,6 @@ def teamLatest(team):
 
     power_string = "offensive" if opr >= dpr else "defensive"
 
-    picker_string = "picker" if rank <= 8 else f"top {round(rank * 0.1)}0"
+    picker_string = "picker" if rank <= 8 and rank != 0 else f"top {round(rank * 0.1)}0"
 
     return respond({"success": True, "next_match": next_match_data, "last_match": last_match_data, "wlt": [win, loss, tie], "wlt_string": wlt_str, "event_rank": rank, "opr":opr, "dpr": dpr, "opr_string": power_string, "rank_string": picker_string})
